@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'com.nosto'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId project.name
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            name = "github"
+            url = uri("https://maven.pkg.github.com/jari-kujansuu/test")
+            credentials(PasswordCredentials)
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url "https://repo.nos.to/content/repositories/central/"
+        credentials {
+            username = "$mavenUser"
+            password = "$mavenPassword"
+        }
+    }
+}
+
+dependencies {
+}
